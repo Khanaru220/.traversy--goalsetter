@@ -8,7 +8,9 @@ require('dotenv').config(); // https://www.npmjs.com/package/dotenv
 
 connectDB();
 
-app.use(cors());
+process.env.NODE_ENV === 'development' && app.use(cors());
+// (need confirm) I assume on Heroku, we send request and handle in same 'origin'
+
 // --- body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
