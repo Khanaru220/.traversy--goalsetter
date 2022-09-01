@@ -19,9 +19,9 @@ const Goal = require('./../models/goalModel.js');
 const displayGoals = asyncHandler(async (req, res, next) => {
 	const goals = await Goal.find({ user: req.user._id }).sort({ createdAt: -1 }); // return all documents
 	if (goals.length === 0) {
-		res.json({ message: 'You have no goal :*( ' });
+		res.json({ goals, message: 'You have no goal :(' });
 	} else {
-		res.json(goals);
+		res.json({ goals, message: '(hack) displayGoals' });
 	}
 });
 
@@ -35,8 +35,9 @@ const addGoal = asyncHandler(async (req, res, next) => {
 		throw new Error(`Please add the 'text' -- from controller`);
 	}
 	try {
-		const goal = await Goal.create({ user: req.user._id, ...req.body }); // create document (match with schema)
-		res.json({ message: 'New goal was added', goal });
+		const goal = await Goal.create({ user: req.user._id, ...req.body });
+		const goals = await Goal.find({ user: req.user._id });
+		res.json({ message: `New goal [${goals.length}] was added`, goal });
 	} catch (e) {
 		if (
 			(e.name === 'MongoServerError' && e.code === 11000) ||
@@ -104,7 +105,8 @@ const deleteGoal = asyncHandler(async (req, res, next) => {
 		);
 	} else {
 		res.json({
-			message: `Goal ${req.params.id} was deleted`,
+			message: `Goal was deleted`,
+			id: req.params.id, //(later) use to detele in Redux state
 		});
 	}
 });
@@ -116,7 +118,7 @@ const displayAllGoals = asyncHandler(async (req, res, next) => {
 	if (process.env.NODE_ENV === 'development') {
 		const goals = await Goal.find().sort({ createdAt: -1 }); // return all documents
 		if (goals.length === 0) {
-			res.json({ message: 'You have no goal :*( ' });
+			res.json({ goals, message: 'You have no goal :*( ' });
 		} else {
 			res.json(goals);
 		}

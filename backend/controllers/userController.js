@@ -29,7 +29,8 @@ const registerUser = asyncHandler(async (req, res, next) => {
 			message: 'Adding user successfuly',
 			user: {
 				id: user._id,
-				name: user.name,
+				// let client decode token to get 'name'
+				_name: user.name,
 				email: user.email,
 				country: user.country,
 			},

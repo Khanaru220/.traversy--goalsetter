@@ -76,19 +76,24 @@ h3 {
 }
 
 .heading {
-	font-size: 2rem;
-	font-weight: 700;
+	font-size: 1.6rem;
+	font-weight: 600;
 	margin-bottom: 50px;
 	padding: 0 20px;
 }
 
+.heading .user-name {
+	font-size: 140%;
+	color: rgb(58, 121, 230);
+}
+
 .heading p {
-	color: #828282;
+	color: #a4a4a4;
 }
 
 .goals {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 10px;
 }
 
@@ -106,12 +111,35 @@ h3 {
 	cursor: pointer;
 	border: none;
 	background: none;
+	opacity: 1;
+
+	transition: all 0.3s;
+}
+
+.goal.removed-goal {
+	opacity: 0;
+}
+
+.goal.close-hover {
+	color: rgba(128, 128, 128, 0.726);
+	background-color: #f9f9f9;
+	box-shadow: inset 0 0 1px red;
+}
+
+.goal.close-hover .close {
+	transform: scale(2) rotate(90deg);
+	color: red;
 }
 
 .form,
 .content {
-	width: 70%;
 	margin: 0 auto;
+}
+.form {
+	width: 70%;
+}
+.content {
+	width: 100%;
 }
 
 .form-group {
