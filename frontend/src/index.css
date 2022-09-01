@@ -94,7 +94,7 @@ h3 {
 
 .goals {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 10px;
 }
 
@@ -103,6 +103,14 @@ h3 {
 	margin: 10px 0;
 	padding: 20px 0 10px;
 	position: relative;
+}
+
+.goal .number {
+	font-family: 'Poppins';
+}
+
+.goal h2 {
+	margin-top: 10px;
 }
 
 .goal .close {
