@@ -5,7 +5,7 @@ const app = express();
 const connectDB = require('./config/db.js');
 const cors = require('cors');
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 
 require('dotenv').config(); // https://www.npmjs.com/package/dotenv
 connectDB();
