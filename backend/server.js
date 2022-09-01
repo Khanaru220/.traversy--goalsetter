@@ -4,20 +4,22 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/db.js');
 const cors = require('cors');
-
-app.use(cors({ credentials: true }));
-
 require('dotenv').config(); // https://www.npmjs.com/package/dotenv
+
 connectDB();
+
+app.use(cors());
 // --- body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, _, next) => {
-	console.log(req.rawHeaders);
-	console.log('URL:', req.url);
-	console.log('METHOD:', req.method);
-	console.log('BODY:', req.body);
+	if (process.env.NODE_ENV === 'development') {
+		console.log(req.rawHeaders);
+		console.log('URL:', req.url);
+		console.log('METHOD:', req.method);
+		console.log('BODY:', req.body);
+	}
 	next();
 });
 // ---
@@ -25,7 +27,6 @@ app.use((req, _, next) => {
 // --- routes
 app.use('/api/goals', require('./routes/goalRoutes.js'));
 app.use('/api/users', require('./routes/userRoutes.js'));
-app.use('/', require('./middlewares/errorHandler.js'));
 
 // --- Serve frontend in 'production'
 // (note) write this below all previous routes
@@ -50,10 +51,11 @@ if (process.env.NODE_ENV === 'production') {
 	// (i assume) it's useful when start server offline (development)
 	// -(but forget) then visit it on browser
 	app.get('*', (req, res) => {
-		res.send('Please try it again on PRODUCTION mode');
+		res.send('Please try again on PRODUCTION mode');
 	});
 }
 
+app.use('/', require('./middlewares/errorHandler.js'));
 // ---
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

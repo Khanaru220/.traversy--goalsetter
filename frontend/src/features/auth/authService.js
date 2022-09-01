@@ -1,7 +1,7 @@
-// console.log(jwt);
+const PORT = process.env.PORT || 5000;
 
 const register = async (accData) => {
-	const response = await fetch('http://localhost:8080/api/users', {
+	const response = await fetch(`http://localhost:${PORT}/api/users`, {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -30,7 +30,7 @@ const register = async (accData) => {
 };
 
 const login = async (accData) => {
-	const response = await fetch('http://localhost:8080/api/users/login', {
+	const response = await fetch(`http://localhost:${PORT}/api/users/login`, {
 		headers: {
 			'Content-Type': 'application/json',
 		},
