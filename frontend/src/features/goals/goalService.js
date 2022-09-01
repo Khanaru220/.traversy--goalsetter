@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 const displayAll = async (token) => {
 	//(?) i can conditioning empty 'user' here, but why not let it
 	// -handle by B.E
-	const response = await fetch(`http://localhost:${PORT}/api/goals`, {
+	const response = await fetch(`http://localhost/api/goals`, {
 		headers: {
 			Authorization: 'Bearer' + ' ' + token,
 		},
@@ -33,7 +33,7 @@ const displayAll = async (token) => {
 const addGoal = async (text, token) => {
 	//(?) i can conditioning empty 'user' here, but why not let it
 	// -handle by B.E
-	const response = await fetch(`http://localhost:${PORT}/api/goals`, {
+	const response = await fetch(`http://localhost/api/goals`, {
 		method: 'POST',
 		headers: {
 			Authorization: 'Bearer' + ' ' + token,
@@ -61,7 +61,7 @@ const addGoal = async (text, token) => {
 const deleteGoal = async (goalId, token) => {
 	//(?) i can conditioning empty 'user' here, but why not let it
 	// -handle by B.E
-	const response = await fetch(`http://localhost:${PORT}/api/goals/${goalId}`, {
+	const response = await fetch(`http://localhost/api/goals/${goalId}`, {
 		method: 'DELETE',
 		headers: {
 			Authorization: 'Bearer' + ' ' + token,
