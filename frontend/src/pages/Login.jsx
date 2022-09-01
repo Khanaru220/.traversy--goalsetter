@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
 
 const delayTime = process.env.REACT_APP_DELAY_LOADING;
+console.log('env', process.env);
 
 function Login() {
 	const [formData, setFormData] = useState({

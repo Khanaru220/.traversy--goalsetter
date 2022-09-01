@@ -7,7 +7,7 @@ const {
 	deleteGoal,
 	displayAllGoals,
 } = require('./../controllers/goalController.js');
-const protectRoute = require('./../middlewares/authMiddleWare.js');
+const protectRoute = require('./../middlewares/authMiddleware.js');
 const isGoalExist = require('./../middlewares/isGoalExist.js');
 // -------------
 
