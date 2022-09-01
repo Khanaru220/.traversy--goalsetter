@@ -11,7 +11,7 @@ import { GoalForm_forward } from '../components/GoalForm';
 import GoalForm from '../components/GoalForm';
 import GoalItem from '../components/GoalItem';
 
-import { updateToast } from '../features/helper/updateToast';
+import { updateToast } from '../features/misc/updateToast';
 import { useEffect, useState, useRef } from 'react';
 
 function Dashboard() {

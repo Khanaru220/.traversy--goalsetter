@@ -1,7 +1,3 @@
-const hostname = process.env.HEROKU_DEPLOY_SERVER
-	? process.env.HEROKU_DEPLOY_SERVER
-	: `http://localhost:${process.env.PORT || 5000}`;
-
 const register = async (accData) => {
 	const response = await fetch('/api/users', {
 		headers: {
