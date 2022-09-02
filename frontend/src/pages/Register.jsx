@@ -9,10 +9,12 @@ import { useNavigate } from 'react-router-dom';
 // create notification box (often in useEffect) - base on status of slice
 // (isError, isLoading, isSuccess)
 import { toast } from 'react-toastify';
+import { updateToast } from '../features/misc/updateToast';
 import { FaUser } from 'react-icons/fa';
 import Spinner from '../components/Spinner';
 
 const delayTime = process.env.REACT_APP_DELAY_LOADING;
+const supportFocusSize = process.env.REACT_APP_SUPPORT_FOCUS_SCREEN_SIZE;
 
 function Register() {
 	const [formData, setFormData] = useState({
@@ -22,7 +24,7 @@ function Register() {
 		password2: '',
 	});
 	const [UILoading, setUILoading] = useState(false);
-	const [nameInput] = [useRef(), useRef(), useRef()];
+	const nameInput = useRef();
 	// this destructing, help we decide smaller version
 	// to attach to request's body
 
@@ -48,11 +50,10 @@ function Register() {
 
 		setTimeout(() => {
 			if (isError) {
-				toast.error(message, { toastId: 'error_register' });
-				toast.update('error_register', {
-					render: message,
-					type: toast.TYPE.ERROR,
-					autoClose: 5000,
+				updateToast({
+					toastId: 'error_register',
+					type: 'error',
+					message,
 				});
 			}
 			if (isSuccess || userToken) {
@@ -94,11 +95,10 @@ function Register() {
 
 		// 1. Validate (client): matching 2 password
 		if (formData.password !== formData.password2) {
-			toast.error(`Password doesn't match`, { toastId: 'error_register' });
-			toast.update('error_register', {
-				render: `Password doesn't match`,
-				type: toast.TYPE.ERROR,
-				autoClose: 5000,
+			updateToast({
+				toastId: 'error_register',
+				type: 'error',
+				message: `Password doesn't match`,
 			});
 
 			return;
@@ -131,7 +131,9 @@ function Register() {
 							value={formData.name}
 							placeholder="Enter your name"
 							onChange={onChange}
-							ref={nameInput}
+							ref={window.screen.width >= supportFocusSize ? nameInput : null}
+							// (prevent focus on smal screen)
+							// (!) still urgly solution, because 'ref' not only for focus purpose
 							required
 						/>
 					</div>

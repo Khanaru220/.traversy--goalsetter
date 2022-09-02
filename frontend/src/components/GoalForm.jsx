@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { addGoal, reset } from '../features/goals/goalSlice';
 import { useSelector, useDispatch } from 'react-redux';
+const supportFocusSize = process.env.REACT_APP_SUPPORT_FOCUS_SCREEN_SIZE;
 
 function GoalForm() {
 	const [formData, setFormData] = useState({
@@ -56,7 +57,7 @@ function GoalForm() {
 						value={formData.text}
 						placeholder="Enter your goal"
 						onChange={onChange}
-						ref={textInput}
+						ref={window.screen.width >= supportFocusSize ? textInput : null}
 						required
 					/>
 				</div>

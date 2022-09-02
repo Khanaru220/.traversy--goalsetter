@@ -43,7 +43,10 @@ function Dashboard() {
 		if (isPageReady && isLoading) {
 			// not run when isLoading page (first rendering)
 			// -(only run when modify goals)
-			updateToast('modify_goal', 'loading', 'In progress, please wait...', {
+			updateToast({
+				toastId: 'modify_goal',
+				type: 'loading',
+				message: 'In progress, please wait...',
 				autoClose: false,
 			});
 		}
@@ -51,8 +54,10 @@ function Dashboard() {
 
 	useEffect(() => {
 		if (isError) {
-			updateToast('error_displaygoals', 'error', message, {
-				autoClose: 5000,
+			updateToast({
+				toastId: 'error_displaygoals',
+				type: 'error',
+				message,
 			});
 		}
 		if (goals.length === 0 && isSuccess && message) {
@@ -80,7 +85,10 @@ function Dashboard() {
 		if (goals.length > 0 && isSuccess && message && !message.includes('hack')) {
 			// (đúng rồi ha) mình đâu có cần phân biệt action nào dispatch
 			// -(add,delete,...). nếu chỉ cần notify, thì tự tui nó có message mà
-			updateToast('modify_goal', 'success', message, {
+			updateToast({
+				toastId: 'modify_goal',
+				type: 'success',
+				message,
 				autoClose: 3000,
 				isLoading: false,
 			});

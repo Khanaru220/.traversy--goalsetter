@@ -5,10 +5,12 @@ import { reset, login } from '../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { updateToast } from '../features/misc/updateToast';
 import Spinner from '../components/Spinner';
 
 const delayTime = process.env.REACT_APP_DELAY_LOADING;
-
+const supportFocusSize = process.env.REACT_APP_SUPPORT_FOCUS_SCREEN_SIZE;
+console.log(supportFocusSize);
 function Login() {
 	const [formData, setFormData] = useState({
 		email: '',
@@ -58,11 +60,10 @@ function Login() {
 		setTimeout(() => {
 			// to sync time with isPageReady when success/fail
 			if (isError) {
-				toast.error(message, { toastId: 'error_login' });
-				toast.update('error_login', {
-					render: message,
-					type: toast.TYPE.ERROR,
-					autoClose: 5000,
+				updateToast({
+					toastId: 'error_login',
+					type: 'error',
+					message,
 				});
 			}
 			if (userToken) {
@@ -138,7 +139,7 @@ function Login() {
 							value={formData.email}
 							placeholder="Enter your email"
 							onChange={onChange}
-							ref={emailInput}
+							ref={window.screen.width >= supportFocusSize ? emailInput : null}
 						/>
 					</div>
 					<div className="form-group">
@@ -149,7 +150,7 @@ function Login() {
 							value={formData.password}
 							placeholder="Enter password"
 							onChange={onChange}
-							ref={passInput}
+							ref={window.screen.width >= supportFocusSize ? passInput : null}
 						/>
 					</div>
 					<div className="form-group">

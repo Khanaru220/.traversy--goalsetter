@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-export const updateToast = (toastId, type, message, bodyObj) => {
+export const updateToast = ({ toastId, type, message, ...bodyObj }) => {
 	// (!) toast.isActive() not always work as expected
 	// -(some cases) notifcation no display but still count as 'active'
 	// -cause missing notification
