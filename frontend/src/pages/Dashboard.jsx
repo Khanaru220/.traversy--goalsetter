@@ -81,7 +81,7 @@ function Dashboard() {
 			// (đúng rồi ha) mình đâu có cần phân biệt action nào dispatch
 			// -(add,delete,...). nếu chỉ cần notify, thì tự tui nó có message mà
 			updateToast('modify_goal', 'success', message, {
-				autoClose: 1500,
+				autoClose: 3000,
 				isLoading: false,
 			});
 		}
