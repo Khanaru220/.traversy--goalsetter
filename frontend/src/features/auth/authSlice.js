@@ -1,15 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
-import jwt_decode from 'jwt-decode';
+import { getUserName } from '../misc/getUserName';
 
 const userToken = localStorage.getItem('userToken');
 // (?) need a page to dispaly when error throw like this one
-let userName;
-try {
-	userName = jwt_decode(userToken).name;
-} catch {
-	localStorage.removeItem('userToken');
-}
+
 const initialState = {
 	userToken: userToken ? userToken : null,
 	// (force checked base on 'user')
@@ -18,7 +13,7 @@ const initialState = {
 	// -(but if) we store userName separately(localStorage)
 	// -we can't not always ensure that userName is right
 	// -(it change quietly)
-	userName: userToken ? userName : null,
+	userName: userToken ? getUserName(userToken) : null,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
@@ -87,7 +82,7 @@ const authSlice = createSlice({
 
 				// 'payload' took from createThunkFunction's return
 				state.userToken = action.payload.token;
-				state.userName = jwt_decode(state.userToken).name;
+				state.userName = getUserName(action.payload.token);
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
@@ -106,7 +101,7 @@ const authSlice = createSlice({
 				state.message = action.payload.message;
 
 				state.userToken = action.payload.token;
-				state.userName = jwt_decode(state.userToken).name;
+				state.userName = getUserName(action.payload.token);
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;

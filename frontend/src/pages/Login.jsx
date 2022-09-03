@@ -10,7 +10,7 @@ import Spinner from '../components/Spinner';
 
 const delayTime = process.env.REACT_APP_DELAY_LOADING;
 const supportFocusSize = process.env.REACT_APP_SUPPORT_FOCUS_SCREEN_SIZE;
-console.log(supportFocusSize);
+
 function Login() {
 	const [formData, setFormData] = useState({
 		email: '',
