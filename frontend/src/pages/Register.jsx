@@ -46,14 +46,7 @@ function Register() {
 	}, []);
 
 	useEffect(() => {
-		if (userToken) {
-			toast.dismiss('error_register');
-			toast.success(message, { toastId: 'success_register' });
-			navigate('/');
-			return;
-		}
-
-		if (!(isSuccess || isError)) return; // guard-clause
+		if (!(isSuccess || isError || userToken)) return; // guard-clause
 
 		setTimeout(() => {
 			if (isError) {
@@ -63,13 +56,16 @@ function Register() {
 					message,
 				});
 			}
-			if (isSuccess) {
-				// remove all Error noti when success
-				toast.dismiss('error_register');
 
-				// pass toastId to prevent duplicate in ReactStrictmode (dev env)
-				// -when redirect by checking 'user'
-				toast.success(message, { toastId: 'success_register' });
+			if (userToken) {
+				if (isSuccess) {
+					// remove all Error noti when success
+					toast.dismiss('error_register');
+
+					// pass toastId to prevent duplicate in ReactStrictmode (dev env)
+					// -when redirect by checking 'user'
+					toast.success(message, { toastId: 'success_register' });
+				}
 				navigate('/');
 			}
 

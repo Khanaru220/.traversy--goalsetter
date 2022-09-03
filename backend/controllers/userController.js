@@ -78,7 +78,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
 	} else {
 		// 4.1 attach "token" to response
 		res.json({
-			message: `Welcome back, ${user.name}. Token will expire in ${hoursExpire} hours`,
+			message: `Welcome back, ${user.name}. Token will be expired in [${hoursExpire}] hours`,
 			token: generateToken(user._id, {
 				name: user.name,
 			}),
@@ -114,7 +114,7 @@ const viewAllUsers = asyncHandler(async (req, res, next) => {
 });
 
 // ultility, generate token for register + login
-const hoursExpire = 1;
+const hoursExpire = 12;
 const generateToken = (id, payload = {}) => {
 	const token = jwt.sign({ id, ...payload }, process.env.JWT_SECRET, {
 		expiresIn: `${hoursExpire}h`,

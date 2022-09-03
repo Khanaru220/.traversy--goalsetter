@@ -41,10 +41,6 @@ function Login() {
 	}, []);
 
 	useEffect(() => {
-		if (userToken) {
-			navigate('/');
-			return;
-		}
 		// (!) the reason it didn't work. 'Message' come at the time of 'loading'
 		// -nothing to focus (only <Spinner/>)
 		// -at the end of current session. isError will reset
@@ -59,7 +55,7 @@ function Login() {
 			focusOnEmail.current();
 		}
 
-		if (!(isError || isSuccess)) return; //guard-clause
+		if (!(isError || isSuccess || userToken)) return; //guard-clause
 
 		setTimeout(() => {
 			// to sync time with isPageReady when success/fail
@@ -72,17 +68,17 @@ function Login() {
 			}
 
 			if (userToken) {
-				toast.dismiss('error_login');
-
-				if (isSuccess || userToken) {
+				if (isSuccess) {
+					toast.dismiss('error_login');
+					// (if user already logged in (without need isSucces))
+					// -doesn't need notification
 					// (has notify) reducer finish --> message exist
 					toast.success(message, { toastId: 'success_login' });
 				}
 				//(no-notify)  redirect (user && !isSuccess)
 				//--> only has 'user', doesn't have 'message'
-
-				navigate('/');
 			}
+			navigate('/');
 		}, delayTime - 100);
 
 		if (isSuccess) {
