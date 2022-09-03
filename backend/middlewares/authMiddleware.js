@@ -14,7 +14,9 @@ const protectRoute = asyncHandler(async (req, res, next) => {
 	const token = bearer.split(' ')[1];
 	// 1.3 verify token
 	// format Authentication bearer: 'Bearer <token>'
-	const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
+	const decodedPayload = jwt.verify(token, process.env.JWT_SECRET, (err) => {
+		throw err;
+	});
 	// 2. make sure it's real 'user'
 	const user = await User.findById({ _id: decodedPayload.id }).select(
 		'-password'

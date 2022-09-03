@@ -4,6 +4,7 @@ import { FaDivide } from 'react-icons/fa';
 
 function GoalItem({ goal, index }) {
 	const dispatch = useDispatch();
+	const formatLineBrString = goal.text.replaceAll(/\\n/g, '<br>\n');
 
 	return (
 		<div className="goal">
@@ -13,7 +14,8 @@ function GoalItem({ goal, index }) {
 			<div className="number" style={{ fontStyle: 'italic', fontSize: '50%' }}>
 				-{index}-
 			</div>
-			<h2>{goal.text}</h2>
+			{/* wala, 1h to find how to convert string_HTML to HTML markup */}
+			<h2 dangerouslySetInnerHTML={{ __html: formatLineBrString }} />
 			<button
 				onClick={(e) => {
 					dispatch(deleteGoal(goal._id));
