@@ -9,7 +9,6 @@ try {
 	userName = jwt_decode(userToken).name;
 } catch {
 	localStorage.removeItem('userToken');
-	localStorage.removeItem('userName');
 }
 const initialState = {
 	userToken: userToken ? userToken : null,
@@ -19,7 +18,7 @@ const initialState = {
 	// -(but if) we store userName separately(localStorage)
 	// -we can't not always ensure that userName is right
 	// -(it change quietly)
-	userName: userToken && userName,
+	userName: userToken ? userName : null,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,

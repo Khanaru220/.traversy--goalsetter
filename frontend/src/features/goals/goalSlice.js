@@ -17,7 +17,7 @@ export const displayAll = createAsyncThunk(
 			const token = thunkAPI.getState().auth.userToken;
 			return await goalService.displayAll(token);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.message);
+			return thunkAPI.rejectWithValue(error);
 		}
 	}
 );
@@ -28,7 +28,7 @@ export const addGoal = createAsyncThunk('goals/add', async (text, thunkAPI) => {
 		const token = thunkAPI.getState().auth.userToken;
 		return await goalService.addGoal(text, token);
 	} catch (error) {
-		return thunkAPI.rejectWithValue(error.message);
+		return thunkAPI.rejectWithValue(error);
 	}
 });
 
@@ -40,7 +40,7 @@ export const deleteGoal = createAsyncThunk(
 			const token = thunkAPI.getState().auth.userToken;
 			return await goalService.deleteGoal(goalId, token);
 		} catch (error) {
-			return thunkAPI.rejectWithValue(error.message);
+			return thunkAPI.rejectWithValue(error);
 		}
 	}
 );

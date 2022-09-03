@@ -17,20 +17,19 @@ function App() {
 	// (Toastify's hook) 'notifcation' give us info about notication center
 	// -(id, name,status,...)
 	// (need to call in <App/>) idk why it only display notification of current component call it
-
 	return (
 		<Router>
 			<div className="container">
 				<Header />
 				<Routes>
-					<Route
-						path="/login"
-						element={!userToken ? <Login /> : <Navigate to="/" replace />}
-					/>
-					<Route
-						path="/register"
-						element={!userToken ? <Register /> : <Navigate to="/" replace />}
-					/>
+					{/* should choose 1 way to navigate (<Navugate> here OR useNavigate() hook) */}
+					{/* careful 2 cases need navigate: (1) isSuccess after login,register */}
+					{/* (2) useToken already exist, user go directly URl, we bring them back */}
+					{/* (bug) miss 2 way of navigate. When login/register finish*/}
+					{/* -the page re-render. userToken (mouting) exist before isSuccess (useEffect)*/}
+					{/* -so the logic of isSuccess not be executed. Because the page navigate right away in Mounting App.js */}
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 
 					<Route
 						path="/"

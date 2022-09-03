@@ -41,6 +41,10 @@ function Login() {
 	}, []);
 
 	useEffect(() => {
+		if (userToken) {
+			navigate('/');
+			return;
+		}
 		// (!) the reason it didn't work. 'Message' come at the time of 'loading'
 		// -nothing to focus (only <Spinner/>)
 		// -at the end of current session. isError will reset
@@ -66,10 +70,11 @@ function Login() {
 					message,
 				});
 			}
+
 			if (userToken) {
 				toast.dismiss('error_login');
 
-				if (isSuccess) {
+				if (isSuccess || userToken) {
 					// (has notify) reducer finish --> message exist
 					toast.success(message, { toastId: 'success_login' });
 				}

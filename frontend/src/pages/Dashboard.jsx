@@ -55,11 +55,21 @@ function Dashboard() {
 
 	useEffect(() => {
 		if (isError) {
-			updateToast({
+			toast(message, {
 				toastId: 'error_displaygoals',
-				type: 'error',
-				message,
+				type: toast.TYPE.ERROR,
+				// might be: 'autoClose:false' from loading
+				// -overwrite: closeOnClick of Toastcontainer
+				// -(confirmed) My assume is right
+				closeOnClick: true,
 			});
+			// -------
+			// updateToast({
+			// 	toastId: 'error_displaygoals',
+			// 	type: 'error',
+			// 	message,
+			// });
+			// -------
 			// only trigger Error display (to stop spinner) when page not render first
 			// -not login succes
 			!isPageReady && setIsPageError(true);

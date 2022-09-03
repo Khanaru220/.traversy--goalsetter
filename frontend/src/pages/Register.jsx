@@ -46,6 +46,13 @@ function Register() {
 	}, []);
 
 	useEffect(() => {
+		if (userToken) {
+			toast.dismiss('error_register');
+			toast.success(message, { toastId: 'success_register' });
+			navigate('/');
+			return;
+		}
+
 		if (!(isSuccess || isError)) return; // guard-clause
 
 		setTimeout(() => {
@@ -56,7 +63,7 @@ function Register() {
 					message,
 				});
 			}
-			if (isSuccess || userToken) {
+			if (isSuccess) {
 				// remove all Error noti when success
 				toast.dismiss('error_register');
 
