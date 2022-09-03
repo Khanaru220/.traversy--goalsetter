@@ -17,6 +17,7 @@ import { useEffect, useState, useRef } from 'react';
 function Dashboard() {
 	const dispatch = useDispatch();
 	const [isPageReady, setIsPageReady] = useState(false);
+	const [isPageError, setIsPageError] = useState(false); //case: to different, not display spinner when error
 	// (my-self) this consider as 'state' prevent render dashboard
 	// -at first mounting (while dispatch not run === isLoading not exist yet)
 	// (idea) Spinner render as default (mounting)
@@ -59,6 +60,9 @@ function Dashboard() {
 				type: 'error',
 				message,
 			});
+			// only trigger Error display (to stop spinner) when page not render first
+			// -not login succes
+			!isPageReady && setIsPageError(true);
 		}
 		if (goals.length === 0 && isSuccess && message) {
 			// (not) notify when register successly (first join)
@@ -126,6 +130,14 @@ function Dashboard() {
 					</div>
 				</section>
 			</>
+		);
+	} else if (isPageError) {
+		return (
+			<h2>
+				Error happens all the time.
+				<br />
+				(!) And now it is, please try clear your Local Storage.
+			</h2>
 		);
 	}
 
