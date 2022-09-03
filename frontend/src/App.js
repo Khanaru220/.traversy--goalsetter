@@ -23,8 +23,14 @@ function App() {
 			<div className="container">
 				<Header />
 				<Routes>
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
+					<Route
+						path="/login"
+						element={!userToken ? <Login /> : <Navigate to="/" replace />}
+					/>
+					<Route
+						path="/register"
+						element={!userToken ? <Register /> : <Navigate to="/" replace />}
+					/>
 
 					<Route
 						path="/"

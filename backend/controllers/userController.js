@@ -114,7 +114,7 @@ const viewAllUsers = asyncHandler(async (req, res, next) => {
 });
 
 // ultility, generate token for register + login
-const hoursExpire = 24;
+const hoursExpire = 1;
 const generateToken = (id, payload = {}) => {
 	const token = jwt.sign({ id, ...payload }, process.env.JWT_SECRET, {
 		expiresIn: `${hoursExpire}h`,

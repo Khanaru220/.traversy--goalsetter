@@ -3,7 +3,14 @@ import authService from './authService';
 import jwt_decode from 'jwt-decode';
 
 const userToken = localStorage.getItem('userToken');
-
+// (?) need a page to dispaly when error throw like this one
+let userName;
+try {
+	userName = jwt_decode(userToken).name;
+} catch {
+	localStorage.removeItem('userToken');
+	localStorage.removeItem('userName');
+}
 const initialState = {
 	userToken: userToken ? userToken : null,
 	// (force checked base on 'user')
@@ -12,7 +19,7 @@ const initialState = {
 	// -(but if) we store userName separately(localStorage)
 	// -we can't not always ensure that userName is right
 	// -(it change quietly)
-	userName: userToken ? jwt_decode(userToken).name : '',
+	userName: userToken && userName,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,

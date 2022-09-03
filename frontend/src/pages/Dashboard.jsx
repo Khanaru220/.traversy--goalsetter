@@ -134,9 +134,16 @@ function Dashboard() {
 	} else if (isPageError) {
 		return (
 			<h2>
-				Error happens all the time.
+				ERROR happens all the time, and now it is 🥴
 				<br />
-				(!) And now it is, please try clear your Local Storage.
+				<br />
+				Please try the button{' '}
+				<span
+					style={{ backgroundColor: 'black', color: 'white', padding: '0 5px' }}
+				>
+					Logout
+				</span>{' '}
+				over there ↗
 			</h2>
 		);
 	}
