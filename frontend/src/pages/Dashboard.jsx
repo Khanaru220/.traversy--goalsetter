@@ -18,6 +18,7 @@ function Dashboard() {
 	const dispatch = useDispatch();
 	const [isPageReady, setIsPageReady] = useState(false);
 	const [isPageError, setIsPageError] = useState(false); //case: to different, not display spinner when error
+	const isReversedDisplay = useRef(localStorage.getItem('isReversedDisplay'));
 	// (my-self) this consider as 'state' prevent render dashboard
 	// -at first mounting (while dispatch not run === isLoading not exist yet)
 	// (idea) Spinner render as default (mounting)
@@ -134,9 +135,28 @@ function Dashboard() {
 
 				<section className="content">
 					<div className="goals">
-						{goals.map((goal, i) => (
-							<GoalItem key={goal._id} goal={goal} index={goals.length - i} />
-						))}
+						{goals.map((goal, i) => {
+							// default: display-newest first; numOrder-largest first
+							let numOrder = goals.length - i;
+							if (isReversedDisplay.current === 'true') {
+								// 1. number order: lowest first
+								// '0' for credit about creative work
+								numOrder = i;
+								// 2. display: oldest first (reverse loop)
+								i = goals.length - 1 - i;
+								goal = goals[i];
+							}
+
+							return (
+								// index=goals.length-i: hơi trớ trêu tí
+								// -1. mình muốn goal mới được display trước:
+								// -nên sort ascendant
+								// -và dùng unshift (tức là index sẽ bị ngược chiều)
+								// -2 nhưng mình cũng muốn: hiện số thứ tự của goal:
+								// -nên phải làm index trở nên cùng chiều
+								<GoalItem key={goal._id} goal={goal} numOrder={numOrder} />
+							);
+						})}
 					</div>
 				</section>
 			</>

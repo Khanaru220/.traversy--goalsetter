@@ -2,7 +2,7 @@ import { deleteGoal } from '../features/goals/goalSlice';
 import { useDispatch } from 'react-redux';
 import { FaDivide } from 'react-icons/fa';
 
-function GoalItem({ goal, index }) {
+function GoalItem({ goal, numOrder }) {
 	const dispatch = useDispatch();
 	const formatLineBrString = goal.text.replaceAll(/\\n/g, '<br>\n');
 
@@ -12,7 +12,7 @@ function GoalItem({ goal, index }) {
 				{new Date(goal.createdAt).toLocaleString('en-UK')}
 			</div>
 			<div className="number" style={{ fontStyle: 'italic', fontSize: '50%' }}>
-				-{index}-
+				-{numOrder}-
 			</div>
 			{/* wala, 1h to find how to convert string_HTML to HTML markup */}
 			<h2 dangerouslySetInnerHTML={{ __html: formatLineBrString }} />

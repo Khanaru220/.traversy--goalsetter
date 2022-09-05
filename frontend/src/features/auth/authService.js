@@ -24,6 +24,21 @@ const register = async (accData) => {
 		localStorage.setItem('userToken', data.token);
 	}
 
+	if (accData?.email.toLowerCase().includes('@test.')) {
+		// there're multiple ways to implement this:
+		// 1. in Slice
+		// 2. directly in component
+		// I choose this one because the essential task is:
+		// -read email (could require jwt_decoding/store new state)
+		// -so I take advatange here to access mail + localStorage could
+		// -be manipulated easily (user could experience themselves)
+		// -make it become more like an 'option' rather than a rule for @test.com account
+		// (if want it become rule), I can attach it in authSlice --> depend on current token
+		// --so reset everytime visit
+
+		localStorage.setItem('isReversedDisplay', true);
+	} else localStorage.removeItem('isReversedDisplay');
+
 	return data;
 };
 
@@ -52,6 +67,11 @@ const login = async (accData) => {
 	if (data?.token) {
 		localStorage.setItem('userToken', data.token);
 	}
+
+	if (accData?.email.toLowerCase().includes('@test.')) {
+		// (copied from register() above )
+		localStorage.setItem('isReversedDisplay', true);
+	} else localStorage.removeItem('isReversedDisplay');
 
 	// attach 'name' read from token to the result
 	// -(later) used for update state in 'builder'
