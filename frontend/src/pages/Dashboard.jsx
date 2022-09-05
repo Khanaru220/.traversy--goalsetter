@@ -28,7 +28,7 @@ function Dashboard() {
 	const { goals, isSuccess, isLoading, isError, message } = useSelector(
 		(state) => state.goals
 	);
-	const { userName } = useSelector((state) => state.auth);
+	const { userName, userEmail } = useSelector((state) => state.auth);
 
 	useEffect(() => {
 		// (?) why it re-run when modify goal (edit, add, remove,..)
@@ -38,6 +38,10 @@ function Dashboard() {
 		// -UI update because (re-render -> re-declare 'goals' var -> component update)
 		dispatch(displayAll());
 	}, []);
+
+	useEffect(() => {
+		isPageReady && userEmail && console.log(`You're logging as: ${userEmail}`);
+	}, [isPageReady]);
 
 	useEffect(() => {
 		// (!) bug: don't know why sometime, notification display too much, will stop

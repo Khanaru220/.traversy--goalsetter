@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
-import { getUserName } from '../misc/getUserName';
+import { getDataFromToken } from '../misc/getDataFromToken';
 
 const userToken = localStorage.getItem('userToken');
 // (?) need a page to dispaly when error throw like this one
-
+console.log(getDataFromToken(userToken, 'name'));
 const initialState = {
 	userToken: userToken ? userToken : null,
 	// (force checked base on 'user')
@@ -13,7 +13,8 @@ const initialState = {
 	// -(but if) we store userName separately(localStorage)
 	// -we can't not always ensure that userName is right
 	// -(it change quietly)
-	userName: userToken ? getUserName(userToken) : null,
+	userName: userToken ? getDataFromToken(userToken, 'name') : '',
+	userEmail: userToken ? getDataFromToken(userToken, 'email') : '',
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
@@ -66,7 +67,8 @@ const authSlice = createSlice({
 			// for current session working
 			// (with reloading) it's automatic updated by empty localStorage
 			state.userToken = null;
-			state.userName = null;
+			state.userName = '';
+			state.userEmail = '';
 		},
 	},
 	extraReducers: (builder) => {
@@ -82,7 +84,12 @@ const authSlice = createSlice({
 
 				// 'payload' took from createThunkFunction's return
 				state.userToken = action.payload.token;
-				state.userName = getUserName(action.payload.token);
+				state.userName = getDataFromToken(action.payload.token, 'name');
+				state.userEmail = getDataFromToken(action.payload.token, 'email');
+				// (?) don't know if I should add behavior beside state-related
+				// -(store localStorage, console.log). Or they should be done in different file
+				// -(like authService, component...)
+				// console.log(`You're loggining as: ${state.userEmail}`);
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
@@ -91,6 +98,7 @@ const authSlice = createSlice({
 
 				state.userToken = null;
 				state.userName = '';
+				state.userEmail = '';
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
@@ -101,7 +109,8 @@ const authSlice = createSlice({
 				state.message = action.payload.message;
 
 				state.userToken = action.payload.token;
-				state.userName = getUserName(action.payload.token);
+				state.userName = getDataFromToken(action.payload.token, 'name');
+				state.userEmail = getDataFromToken(action.payload.token, 'email');
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
@@ -110,6 +119,7 @@ const authSlice = createSlice({
 
 				state.userToken = null;
 				state.userName = '';
+				state.userEmail = '';
 			});
 	},
 });

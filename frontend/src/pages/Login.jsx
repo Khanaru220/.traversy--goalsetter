@@ -119,7 +119,6 @@ function Login() {
 		dispatch(login({ email, password }));
 		console.log('Submit');
 	};
-	console.log(formData);
 
 	if (UILoading) {
 		return <Spinner />;

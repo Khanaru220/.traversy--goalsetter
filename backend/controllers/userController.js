@@ -36,6 +36,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
 			},
 			token: generateToken(user._id, {
 				name: user.name,
+				email: user.email,
 			}),
 		});
 		// res.json(user.name._doc);
@@ -81,6 +82,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
 			message: `Welcome back, ${user.name}. Token will be expired in [${hoursExpire}] hours`,
 			token: generateToken(user._id, {
 				name: user.name,
+				email: user.email,
 			}),
 		});
 	}
