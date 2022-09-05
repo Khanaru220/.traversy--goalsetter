@@ -66,7 +66,7 @@ const authSlice = createSlice({
 			// for current session working
 			// (with reloading) it's automatic updated by empty localStorage
 			state.userToken = null;
-			state.userName = '';
+			state.userName = null;
 		},
 	},
 	extraReducers: (builder) => {

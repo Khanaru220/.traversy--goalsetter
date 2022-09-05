@@ -77,8 +77,10 @@ function Login() {
 				}
 				//(no-notify)  redirect (user && !isSuccess)
 				//--> only has 'user', doesn't have 'message'
+				// (*)omg, bug occured when I miss put navigate('/') outside
+				// -cause re-render this component --> reset state --> reset input field
+				navigate('/');
 			}
-			navigate('/');
 		}, delayTime - 100);
 
 		if (isSuccess) {
@@ -115,7 +117,9 @@ function Login() {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(login({ email, password }));
+		console.log('Submit');
 	};
+	console.log(formData);
 
 	if (UILoading) {
 		return <Spinner />;
