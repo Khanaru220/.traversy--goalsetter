@@ -8,12 +8,13 @@ const {
 	viewAllUsers,
 } = require('./../controllers/userController.js');
 const protectRoute = require('./../middlewares/authMiddleware.js');
+const normalizeEmail = require('./../middlewares/normalizeEmail.js');
 // -------------
 
 // '/api/users'
 // using 'controllers' for route hanlders
-router.route('/').post(registerUser);
-router.route('/login').post(loginUser);
+router.route('/').post(normalizeEmail).post(registerUser);
+router.route('/login').post(normalizeEmail).post(loginUser);
 router.route('/me').all(protectRoute).get(viewUser).delete(deleteUser);
 
 // development environment
