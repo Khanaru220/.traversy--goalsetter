@@ -62,9 +62,9 @@ h3 {
 
 .container {
 	width: 100%;
-	max-width: 960px;
+	max-width: 9.6rem;
 	/* cho có nhiều khoảng trống hạn chế breakline */
-	max-width: 1060px;
+	max-width: 10.6rem;
 	margin: 0 auto;
 	padding: 0 2rem;
 	text-align: center;
@@ -127,11 +127,11 @@ h3 {
 .goal {
 	background-color: #f4f4f4;
 
-	margin: 10px 0;
-	padding: 20px 0 10px;
+	margin: 1rem 0;
+	padding: 2rem 0 1rem;
 	position: relative;
 
-	border-radius: 10px;
+	border-radius: 1rem;
 }
 
 .theme-xuandieu .goal {
@@ -160,7 +160,7 @@ h3 {
 	top: 50%;
 	transform: translateY(-50%);
 
-	box-shadow: -2px 0 10px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: -2px 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .theme-xuandieu .goal:first-child,
