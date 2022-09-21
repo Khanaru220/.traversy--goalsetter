@@ -30,8 +30,12 @@ function App() {
 					{/* -so the logic of isSuccess not be executed. Because the page navigate right away in Mounting App.js */}
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
-
-					<Route path="/" element={<Dashboard />} />
+					<Route
+						path="/"
+						element={
+							userToken ? <Dashboard /> : <Navigate to="/login" replace />
+						}
+					/>{' '}
 				</Routes>
 
 				<ToastContainer
