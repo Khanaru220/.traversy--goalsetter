@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Gentium+Plus&family=Spectral&display=swap');
 * {
 	margin: 0;
 	padding: 0;
@@ -15,6 +17,23 @@ body {
 	font-size: 1.6rem;
 	font-family: 'Be Vietnam Pro', 'Poppins', sans-serif;
 	height: 100vh;
+}
+
+body.theme-xuandieu {
+	/* test Xuân Diệu */
+	/* background-color: #a8dadc; */
+	background: radial-gradient(ellipse, #ffafcc 0%, #a8dadc 30%);
+}
+
+body.theme-harrypotter {
+	/* test HarryPotter */
+	background: #360d0c;
+}
+
+.theme-harrypotter .goals {
+	/* variables */
+	--degree-bg: 111deg;
+	--blend-left-color: #4d1a1d;
 }
 
 a {
@@ -38,14 +57,16 @@ h1,
 h2,
 h3 {
 	font-weight: 600;
-	margin-bottom: 10px;
+	margin-bottom: 1rem;
 }
 
 .container {
 	width: 100%;
 	max-width: 960px;
+	/* cho có nhiều khoảng trống hạn chế breakline */
+	max-width: 1060px;
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 2rem;
 	text-align: center;
 }
 
@@ -53,9 +74,9 @@ h3 {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px 0;
+	padding: 2rem 0;
 	border-bottom: 1px solid #e6e6e6;
-	margin-bottom: 60px;
+	margin-bottom: 6rem;
 }
 
 .header ul {
@@ -65,7 +86,7 @@ h3 {
 }
 
 .header ul li {
-	margin-left: 20px;
+	margin-left: 2rem;
 }
 
 .header ul li a {
@@ -84,8 +105,8 @@ h3 {
 .heading {
 	font-size: 2.4rem;
 	font-weight: 600;
-	margin-bottom: 50px;
-	padding: 0 20px;
+	margin-bottom: 5rem;
+	padding: 0 2rem;
 }
 
 .heading .user-name {
@@ -100,30 +121,172 @@ h3 {
 .goals {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 10px;
+	gap: 1rem;
 }
 
 .goal {
 	background-color: #f4f4f4;
+
 	margin: 10px 0;
 	padding: 20px 0 10px;
 	position: relative;
+
+	border-radius: 10px;
+}
+
+.theme-xuandieu .goal {
+	/* test Xuân Diệu */
+	background-color: #fff9f1;
+
+	/* border: solid 1px grey; */
+	/* color: ; */
+}
+
+.theme-harrypotter .goal {
+	position: relative;
+	overflow: hidden;
+}
+
+.theme-harrypotter .goal:not(:first-child)::after {
+	content: '';
+
+	position: absolute;
+	height: 100%;
+	/* iphone 6 need fix */
+	aspect-ratio: 1/1;
+	background: red;
+	background-size: contain;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+
+	box-shadow: -2px 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.theme-xuandieu .goal:first-child,
+.theme-harrypotter .goal:first-child {
+	/* test Xuân Diệu */
+	grid-column: span 2;
+}
+
+.theme-harrypotter .goal:nth-child(2)::after {
+	/* source: harrypotterfanzone.com */
+	background-image: url('./assets/images/01_mirror-of-erised.jpg');
+}
+.theme-harrypotter .goal:nth-child(3)::after {
+	/* source: deviantart.com.com */
+	background-image: url('./assets/images/02_fawkes.jpg');
+}
+.theme-harrypotter .goal:nth-child(4)::after {
+	/* source: minalima.com */
+	background-image: url('./assets/images/03_time-turner.jpg');
+}
+.theme-harrypotter .goal:nth-child(5)::after {
+	/* source: behance.net */
+	background-image: url('./assets/images/04_goblet-of-fire.jpg');
+}
+.theme-harrypotter .goal:nth-child(6)::after {
+	/* source: buzzfeed.com */
+	background-image: url('./assets/images/05_prophency-ball.jpg');
+}
+.theme-harrypotter .goal:nth-child(7)::after {
+	/* source: artstation.com */
+	background-image: url('./assets/images/06_felix-felicis.jpg');
+}
+.theme-harrypotter .goal:nth-child(8)::after {
+	/* source: deviantart.com */
+	background-image: url('./assets/images/07_deathly-hallows.jpg');
+}
+
+.theme-harrypotter .goal:nth-child(1) {
+	color: #fff;
+	background: radial-gradient(
+		circle,
+		rgba(30, 3, 7, 1) 16%,
+		rgba(47, 61, 19, 1) 20%,
+		rgba(43, 1, 8, 1) 61%
+	);
+}
+.theme-harrypotter .goal:nth-child(2) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#848484 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(3) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		rgba(22, 7, 44) 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(4) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#c79a52 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(5) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#00726f 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(6) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#759fad 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(7) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#acb275 100%
+	);
+}
+.theme-harrypotter .goal:nth-child(8) {
+	background: linear-gradient(
+		var(--degree-bg),
+		var(--blend-left-color) 0%,
+		#fff 100%
+	);
 }
 
 .goal .number {
 	font-family: 'Poppins';
-	font-size: 60%;
+	font-size: 80%;
 }
 
 .goal h2 {
-	margin-top: 10px;
+	margin-top: 1rem;
 	font-size: 2rem;
+}
+
+.theme-xuandieu .goal h2 {
+	/* test Xuân Diệu */
+	font-size: 2rem;
+	line-height: 1.2;
+	font-weight: 400;
+	font-family: Inconsolata, Bitter, Consolas;
+}
+
+.theme-xuandieu .goal h2 {
+	/* test Xuân Diệu */
+	font-size: 2rem;
+	line-height: 1.2;
+	font-weight: 400;
+	font-family: Inconsolata, Bitter, Consolas;
 }
 
 .goal .close {
 	position: absolute;
-	top: 10px;
-	right: 15px;
+	top: 1rem;
+	right: 1.5rem;
 	cursor: pointer;
 	border: none;
 	background: none;
@@ -139,7 +302,7 @@ h3 {
 .goal.close-hover {
 	color: rgba(128, 128, 128, 0.726);
 	background-color: #f9f9f9;
-	box-shadow: inset 0 0 1px red;
+	box-shadow: inset 0 0 0 2px red;
 }
 
 .goal.close-hover .close {
@@ -159,17 +322,17 @@ h3 {
 }
 
 .form-group {
-	margin-bottom: 10px;
+	margin-bottom: 1rem;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
 	width: 100%;
-	padding: 10px;
+	padding: 1rem;
 	border: 1px solid #e6e6e6;
 	border-radius: 5px;
-	margin-bottom: 10px;
+	margin-bottom: 1rem;
 	font-family: inherit;
 }
 
@@ -180,12 +343,12 @@ h3 {
 }
 
 .btn {
-	padding: 10px 20px;
+	padding: 1rem 2rem;
 	border: 1px solid #000;
 	border-radius: 5px;
 	background: #000;
 	color: #fff;
-	font-size: 16px;
+	font-size: 1.6rem;
 	font-weight: 700;
 	cursor: pointer;
 	text-align: center;
@@ -206,7 +369,7 @@ h3 {
 
 .btn-block {
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 2rem;
 }
 
 .btn:hover {
@@ -227,8 +390,8 @@ h3 {
 }
 
 .loadingSpinner {
-	width: 64px;
-	height: 64px;
+	width: 6.4rem;
+	height: 6.4rem;
 	border: 8px solid;
 	border-color: #000 transparent #555 transparent;
 	border-radius: 50%;
@@ -244,7 +407,11 @@ h3 {
 	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+	html {
+		font-size: 50%;
+	}
+
 	.form {
 		width: 90%;
 	}

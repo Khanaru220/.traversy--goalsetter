@@ -31,12 +31,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 
-					<Route
-						path="/"
-						element={
-							userToken ? <Dashboard /> : <Navigate to="/login" replace />
-						}
-					/>
+					<Route path="/" element={<Dashboard />} />
 				</Routes>
 
 				<ToastContainer

@@ -4,7 +4,6 @@ import { getDataFromToken } from '../misc/getDataFromToken';
 
 const userToken = localStorage.getItem('userToken');
 // (?) need a page to dispaly when error throw like this one
-console.log(getDataFromToken(userToken, 'name'));
 const initialState = {
 	userToken: userToken ? userToken : null,
 	// (force checked base on 'user')

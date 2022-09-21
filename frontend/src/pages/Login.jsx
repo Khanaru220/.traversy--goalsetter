@@ -117,7 +117,6 @@ function Login() {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(login({ email, password }));
-		console.log('Submit');
 	};
 
 	if (UILoading) {

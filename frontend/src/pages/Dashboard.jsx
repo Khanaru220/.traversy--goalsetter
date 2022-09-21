@@ -10,6 +10,7 @@ import Spinner from '../components/Spinner';
 import { GoalForm_forward } from '../components/GoalForm';
 import GoalForm from '../components/GoalForm';
 import GoalItem from '../components/GoalItem';
+import PortraitCharacter from '../components/PortraitCharacter';
 
 import { updateToast } from '../features/misc/updateToast';
 import { useEffect, useState, useRef } from 'react';
@@ -19,6 +20,8 @@ function Dashboard() {
 	const [isPageReady, setIsPageReady] = useState(false);
 	const [isPageError, setIsPageError] = useState(false); //case: to different, not display spinner when error
 	const isReversedDisplay = useRef(localStorage.getItem('isReversedDisplay'));
+	// to decide display portrait in '/components/PortraitCharacters.jsx'
+	const theme = useRef(null);
 	// (my-self) this consider as 'state' prevent render dashboard
 	// -at first mounting (while dispatch not run === isLoading not exist yet)
 	// (idea) Spinner render as default (mounting)
@@ -30,6 +33,36 @@ function Dashboard() {
 	);
 	const { userName, userEmail } = useSelector((state) => state.auth);
 
+	// (?) i still don't know how to execute an action in mounting (but do it once)
+	// add class CSS for @test account
+	// (only enable when visit Dashboard)
+
+	if (isPageReady) {
+		switch (userEmail) {
+			case 'thekingoflovepoetry@test.vi':
+				// Xuân Diệu
+				// (!) important it's used in 2 cases (className + condition to choose portrait)
+				theme.current = 'theme-xuandieu';
+				break;
+			case 'theladyofvuongfamily@test.vi':
+				// Truyện Kiều
+				theme.current = 'theme-truyenkieu';
+				break;
+			case 'theboywholived@test.uk':
+				// Harry Potter
+				theme.current = 'theme-harrypotter';
+				break;
+			case 'thewoman@test.uk':
+				// Irene Adler
+				theme.current = 'theme-ireneadler';
+				break;
+			default:
+		}
+
+		theme.current &&
+			document.querySelector('body').classList.add(theme.current);
+	}
+
 	useEffect(() => {
 		// (?) why it re-run when modify goal (edit, add, remove,..)
 		// -(Here we use [])
@@ -37,6 +70,10 @@ function Dashboard() {
 		// -displayAll, actually mean getAllGoals (only fetching data, not 'dispaly')
 		// -UI update because (re-render -> re-declare 'goals' var -> component update)
 		dispatch(displayAll());
+		return () => {
+			// reset customize of testaccount when unmount (when click Logout)
+			document.querySelector('body').classList.remove(theme.current);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -125,63 +162,39 @@ function Dashboard() {
 	// -(default: Content) - (next render: Spinner)
 	// -Dashboard: need fetching goals at first rendering
 	// -(default: Spinner) - (next render: Content)
-	if (isPageReady) {
-		return (
-			<>
-				<section className="heading">
-					<h1>
-						Howdy, <span className="user-name">{userName}</span>
-					</h1>
-					<p>Goals Dashboard</p>
-				</section>
-				{/* <GoalForm_forward ref={textInputRef} /> */}
+	return (
+		<>
+			<section className="heading">
+				<h1>
+					Howdy, <span className="user-name">{userName}</span>
+				</h1>
+				<p>Goals Dashboard</p>
+			</section>
+			{/* <GoalForm_forward ref={textInputRef} /> */}
+			{userEmail.includes('@test.') ? (
+				<PortraitCharacter theme={theme.current} />
+			) : (
 				<GoalForm />
+			)}
 
-				<section className="content">
-					<div className="goals">
-						{goals.map((goal, i) => {
-							// default: display-newest first; numOrder-largest first
-							let numOrder = goals.length - i;
-							if (isReversedDisplay.current === 'true') {
-								// 1. number order: lowest first
-								// '0' for credit about creative work
-								numOrder = i;
-								// 2. display: oldest first (reverse loop)
-								i = goals.length - 1 - i;
-								goal = goals[i];
-							}
+			<section className="content">
+				<div className="goals">
+					{goals.map((goal, i) => {
+						let numOrder = goals.length - i;
 
-							return (
-								// index=goals.length-i: hơi trớ trêu tí
-								// -1. mình muốn goal mới được display trước:
-								// -nên sort ascendant
-								// -và dùng unshift (tức là index sẽ bị ngược chiều)
-								// -2 nhưng mình cũng muốn: hiện số thứ tự của goal:
-								// -nên phải làm index trở nên cùng chiều
-								<GoalItem key={goal._id} goal={goal} numOrder={numOrder} />
-							);
-						})}
-					</div>
-				</section>
-			</>
-		);
-	} else if (isPageError) {
-		return (
-			<h2>
-				ERROR happens all the time, and now it is 🥴
-				<br />
-				<br />
-				Please try the button{' '}
-				<span
-					style={{ backgroundColor: 'black', color: 'white', padding: '0 5px' }}
-				>
-					Logout
-				</span>{' '}
-				over there ↗
-			</h2>
-		);
-	}
-
-	return <Spinner />;
+						return (
+							// index=goals.length-i: hơi trớ trêu tí
+							// -1. mình muốn goal mới được display trước:
+							// -nên sort ascendant
+							// -và dùng unshift (tức là index sẽ bị ngược chiều)
+							// -2 nhưng mình cũng muốn: hiện số thứ tự của goal:
+							// -nên phải làm index trở nên cùng chiều
+							<GoalItem key={i} goal={goal} numOrder={numOrder} />
+						);
+					})}
+				</div>
+			</section>
+		</>
+	);
 }
 export default Dashboard;

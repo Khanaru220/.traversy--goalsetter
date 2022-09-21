@@ -4,7 +4,7 @@ import { FaDivide } from 'react-icons/fa';
 
 function GoalItem({ goal, numOrder }) {
 	const dispatch = useDispatch();
-	const formatLineBrString = goal.text.replaceAll(/\\n/g, '<br>\n');
+	const formatLineBrString = goal.text.replace(/\\n/g, '<br>\n');
 
 	return (
 		<div className="goal">
