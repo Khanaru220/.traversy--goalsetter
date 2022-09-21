@@ -2,9 +2,14 @@ import { deleteGoal } from '../features/goals/goalSlice';
 import { useDispatch } from 'react-redux';
 import { FaDivide } from 'react-icons/fa';
 
-function GoalItem({ goal, numOrder }) {
+function GoalItem({ goal, numOrder, isApprovedToLoadHTML }) {
 	const dispatch = useDispatch();
 	const formatLineBrString = goal.text.replace(/\\n/g, '<br>\n');
+	const goalTextHTML = isApprovedToLoadHTML ? (
+		<h2 dangerouslySetInnerHTML={{ __html: formatLineBrString }} />
+	) : (
+		<h2>{goal.text}</h2>
+	);
 
 	return (
 		<div className="goal">
@@ -15,22 +20,26 @@ function GoalItem({ goal, numOrder }) {
 				-{numOrder}-
 			</div>
 			{/* wala, 1h to find how to convert string_HTML to HTML markup */}
-			<h2 dangerouslySetInnerHTML={{ __html: formatLineBrString }} />
-			<button
-				onClick={(e) => {
-					dispatch(deleteGoal(goal._id));
-					e.target.closest('.goal').classList.add('removed-goal');
-				}}
-				onMouseEnter={(e) => {
-					e.target.closest('.goal').classList.add('close-hover');
-				}}
-				onMouseLeave={(e) => {
-					e.target.closest('.goal').classList.remove('close-hover');
-				}}
-				className="close"
-			>
-				X
-			</button>
+			{goalTextHTML}
+			{isApprovedToLoadHTML ? (
+				''
+			) : (
+				<button
+					onClick={(e) => {
+						dispatch(deleteGoal(goal._id));
+						e.target.closest('.goal').classList.add('removed-goal');
+					}}
+					onMouseEnter={(e) => {
+						e.target.closest('.goal').classList.add('close-hover');
+					}}
+					onMouseLeave={(e) => {
+						e.target.closest('.goal').classList.remove('close-hover');
+					}}
+					className="close"
+				>
+					X
+				</button>
+			)}
 		</div>
 	);
 }

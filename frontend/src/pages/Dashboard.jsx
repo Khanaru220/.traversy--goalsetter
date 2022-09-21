@@ -10,6 +10,7 @@ import Spinner from '../components/Spinner';
 import { GoalForm_forward } from '../components/GoalForm';
 import GoalForm from '../components/GoalForm';
 import GoalItem from '../components/GoalItem';
+import PortraitCharacter from '../components/PortraitCharacter';
 
 import { updateToast } from '../features/misc/updateToast';
 import { useEffect, useState, useRef } from 'react';
@@ -19,6 +20,9 @@ function Dashboard() {
 	const [isPageReady, setIsPageReady] = useState(false);
 	const [isPageError, setIsPageError] = useState(false); //case: to different, not display spinner when error
 	const isReversedDisplay = useRef(localStorage.getItem('isReversedDisplay'));
+	// to decide display portrait in '/components/PortraitCharacters.jsx'
+	const theme = useRef(null);
+	const isApprovedToLoadHTML = useRef(false);
 	// (my-self) this consider as 'state' prevent render dashboard
 	// -at first mounting (while dispatch not run === isLoading not exist yet)
 	// (idea) Spinner render as default (mounting)
@@ -30,6 +34,47 @@ function Dashboard() {
 	);
 	const { userName, userEmail } = useSelector((state) => state.auth);
 
+	// (?) i still don't know how to execute an action in mounting (but do it once)
+	// add class CSS for @test account
+	// (only enable when visit Dashboard)
+
+	if (isPageReady) {
+		// (!) urgly fix: need some way to combine 'check exist' + switch/case
+		if (
+			[
+				'thekingoflovepoetry@test.vi',
+				'theladyofvuongfamily@test.vi',
+				'theboywholived@test.uk',
+				'thewoman@test.uk',
+			].includes(userEmail)
+		) {
+			isApprovedToLoadHTML.current = true;
+		}
+		switch (userEmail) {
+			case 'thekingoflovepoetry@test.vi':
+				// Xuân Diệu
+				// (!) important it's used in 2 cases (className + condition to choose portrait)
+				theme.current = 'theme-xuandieu';
+				break;
+			case 'theladyofvuongfamily@test.vi':
+				// Truyện Kiều
+				theme.current = 'theme-truyenkieu';
+				break;
+			case 'theboywholived@test.uk':
+				// Harry Potter
+				theme.current = 'theme-harrypotter';
+				break;
+			case 'thewoman@test.uk':
+				// Irene Adler
+				theme.current = 'theme-ireneadler';
+				break;
+			default:
+		}
+
+		theme.current &&
+			document.querySelector('body').classList.add(theme.current);
+	}
+
 	useEffect(() => {
 		// (?) why it re-run when modify goal (edit, add, remove,..)
 		// -(Here we use [])
@@ -37,6 +82,10 @@ function Dashboard() {
 		// -displayAll, actually mean getAllGoals (only fetching data, not 'dispaly')
 		// -UI update because (re-render -> re-declare 'goals' var -> component update)
 		dispatch(displayAll());
+		return () => {
+			// reset customize of testaccount when unmount (when click Logout)
+			document.querySelector('body').classList.remove(theme.current);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -135,8 +184,11 @@ function Dashboard() {
 					<p>Goals Dashboard</p>
 				</section>
 				{/* <GoalForm_forward ref={textInputRef} /> */}
-				<GoalForm />
-
+				{userEmail.includes('@test.') ? (
+					<PortraitCharacter theme={theme.current} />
+				) : (
+					<GoalForm />
+				)}
 				<section className="content">
 					<div className="goals">
 						{goals.map((goal, i) => {
@@ -158,7 +210,12 @@ function Dashboard() {
 								// -và dùng unshift (tức là index sẽ bị ngược chiều)
 								// -2 nhưng mình cũng muốn: hiện số thứ tự của goal:
 								// -nên phải làm index trở nên cùng chiều
-								<GoalItem key={goal._id} goal={goal} numOrder={numOrder} />
+								<GoalItem
+									key={goal._id}
+									goal={goal}
+									numOrder={numOrder}
+									isApprovedToLoadHTML={isApprovedToLoadHTML.current}
+								/>
 							);
 						})}
 					</div>

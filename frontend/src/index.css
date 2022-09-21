@@ -415,6 +415,18 @@ h3 {
 		font-size: 2.4rem;
 	}
 
+	.goals {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.theme-xuandieu .goal:first-child,
+	.theme-harrypotter .goal:first-child {
+		/* test Xuân Diệu */
+		grid-column: span 1;
+	}
+
 	.goal h2 {
 		font-size: 1.4rem;
 	}
