@@ -64,7 +64,7 @@ h3 {
 	width: 100%;
 	max-width: 9.6rem;
 	/* cho có nhiều khoảng trống hạn chế breakline */
-	max-width: 10.6rem;
+	max-width: 1060px;
 	margin: 0 auto;
 	padding: 0 2rem;
 	text-align: center;
@@ -269,15 +269,6 @@ h3 {
 
 .theme-xuandieu .goal h2 {
 	/* test Xuân Diệu */
-	font-size: 2rem;
-	line-height: 1.2;
-	font-weight: 400;
-	font-family: Inconsolata, Bitter, Consolas;
-}
-
-.theme-xuandieu .goal h2 {
-	/* test Xuân Diệu */
-	font-size: 2rem;
 	line-height: 1.2;
 	font-weight: 400;
 	font-family: Inconsolata, Bitter, Consolas;
