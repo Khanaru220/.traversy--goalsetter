@@ -1,9 +1,10 @@
 import { deleteGoal } from '../features/goals/goalSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaDivide } from 'react-icons/fa';
 
 function GoalItem({ goal, numOrder, isApprovedToLoadHTML }) {
 	const dispatch = useDispatch();
+	const { userEmail } = useSelector((state) => state.auth);
 	const formatLineBrString = goal.text.replace(/\\n/g, '<br>\n');
 	const goalTextHTML = isApprovedToLoadHTML ? (
 		<h2 dangerouslySetInnerHTML={{ __html: formatLineBrString }} />
@@ -45,6 +46,12 @@ function GoalItem({ goal, numOrder, isApprovedToLoadHTML }) {
 					</button>
 				)}
 			</div>
+			{/* image only for Harry potter now */}
+			{userEmail === 'theboywholived@test.uk' ? (
+				<div className="goal-image"></div>
+			) : (
+				''
+			)}
 		</div>
 	);
 }

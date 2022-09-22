@@ -3,6 +3,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Gentium+Plus&family=Spectral&display=swap');
+
+/* SUPPORT MY IPHONE (start) */
+@supports not (aspect-ratio: 1/1) {
+	/** Fallback (current, using intrinsic ratio technique) */
+	.theme-harrypotter .goal:not(:first-child) .goal-image::before {
+		float: left;
+		padding-top: 100%;
+		content: '';
+	}
+	.theme-harrypotter .goal:not(:first-child) .goal-image:after {
+		display: block;
+		content: '';
+		clear: both;
+	}
+}
+/* SUPPORT MY IPHONE (end) */
+
+/* GENERAL SELECTER (start) */
 * {
 	margin: 0;
 	padding: 0;
@@ -30,12 +48,6 @@ body.theme-harrypotter {
 	background: #360d0c;
 }
 
-.theme-harrypotter .goals {
-	/* variables */
-	--degree-bg: 111deg;
-	--blend-left-color: #4d1a1d;
-}
-
 a {
 	text-decoration: none;
 	color: #000;
@@ -59,6 +71,8 @@ h3 {
 	font-weight: 600;
 	margin-bottom: 1rem;
 }
+
+/* GENERAL SELECTER (end) */
 
 .container {
 	width: 100%;
@@ -124,6 +138,12 @@ h3 {
 	gap: 1rem;
 }
 
+.theme-harrypotter .goals {
+	/* variables */
+	--degree-bg: 111deg;
+	--blend-left-color: #4d1a1d;
+}
+
 .goal {
 	background-color: #f4f4f4;
 
@@ -148,12 +168,11 @@ h3 {
 	overflow: hidden;
 }
 
-.theme-harrypotter .goal:not(:first-child)::after {
+.theme-harrypotter .goal:not(:first-child) .goal-image {
 	content: '';
 
 	/* position: absolute; */
 	height: 100%;
-	/* iphone 6 need fix */
 	aspect-ratio: 1/1;
 	background: red;
 	background-size: contain;
@@ -170,31 +189,31 @@ h3 {
 	grid-column: span 2;
 }
 
-.theme-harrypotter .goal:nth-child(2)::after {
+.theme-harrypotter .goal:nth-child(2) .goal-image {
 	/* source: harrypotterfanzone.com */
 	background-image: url('./assets/images/01_mirror-of-erised.jpg');
 }
-.theme-harrypotter .goal:nth-child(3)::after {
+.theme-harrypotter .goal:nth-child(3) .goal-image {
 	/* source: deviantart.com.com */
 	background-image: url('./assets/images/02_fawkes.jpg');
 }
-.theme-harrypotter .goal:nth-child(4)::after {
+.theme-harrypotter .goal:nth-child(4) .goal-image {
 	/* source: minalima.com */
 	background-image: url('./assets/images/03_time-turner.jpg');
 }
-.theme-harrypotter .goal:nth-child(5)::after {
+.theme-harrypotter .goal:nth-child(5) .goal-image {
 	/* source: behance.net */
 	background-image: url('./assets/images/04_goblet-of-fire.jpg');
 }
-.theme-harrypotter .goal:nth-child(6)::after {
+.theme-harrypotter .goal:nth-child(6) .goal-image {
 	/* source: buzzfeed.com */
 	background-image: url('./assets/images/05_prophency-ball.jpg');
 }
-.theme-harrypotter .goal:nth-child(7)::after {
+.theme-harrypotter .goal:nth-child(7) .goal-image {
 	/* source: artstation.com */
 	background-image: url('./assets/images/06_felix-felicis.jpg');
 }
-.theme-harrypotter .goal:nth-child(8)::after {
+.theme-harrypotter .goal:nth-child(8) .goal-image {
 	/* source: deviantart.com */
 	background-image: url('./assets/images/07_deathly-hallows.jpg');
 }
