@@ -286,14 +286,18 @@ h3 {
 	transition: all 0.3s;
 }
 
+.goal.close-hover,
 .goal.removed-goal {
+	box-shadow: inset 0 0 0 2px red;
+	background-color: #f9f9f9;
+}
+
+.goal.removed-goal .goal-content {
 	opacity: 0;
 }
 
-.goal.close-hover {
+.goal.close-hover .goal-content {
 	color: rgba(128, 128, 128, 0.726);
-	background-color: #f9f9f9;
-	box-shadow: inset 0 0 0 2px red;
 }
 
 .goal.close-hover .close {

@@ -13,33 +13,38 @@ function GoalItem({ goal, numOrder, isApprovedToLoadHTML }) {
 
 	return (
 		<div className="goal">
-			<div className="number">
-				{new Date(goal.createdAt).toLocaleString('en-UK')}
-			</div>
-			<div className="number" style={{ fontStyle: 'italic', fontSize: '50%' }}>
-				-{numOrder}-
-			</div>
-			{/* wala, 1h to find how to convert string_HTML to HTML markup */}
-			{goalTextHTML}
-			{isApprovedToLoadHTML ? (
-				''
-			) : (
-				<button
-					onClick={(e) => {
-						dispatch(deleteGoal(goal._id));
-						e.target.closest('.goal').classList.add('removed-goal');
-					}}
-					onMouseEnter={(e) => {
-						e.target.closest('.goal').classList.add('close-hover');
-					}}
-					onMouseLeave={(e) => {
-						e.target.closest('.goal').classList.remove('close-hover');
-					}}
-					className="close"
+			<div className="goal-content">
+				<div className="number">
+					{new Date(goal.createdAt).toLocaleString('en-UK')}
+				</div>
+				<div
+					className="number"
+					style={{ fontStyle: 'italic', fontSize: '50%' }}
 				>
-					X
-				</button>
-			)}
+					-{numOrder}-
+				</div>
+				{/* wala, 1h to find how to convert string_HTML to HTML markup */}
+				{goalTextHTML}
+				{isApprovedToLoadHTML ? (
+					''
+				) : (
+					<button
+						onClick={(e) => {
+							dispatch(deleteGoal(goal._id));
+							e.target.closest('.goal').classList.add('removed-goal');
+						}}
+						onMouseEnter={(e) => {
+							e.target.closest('.goal').classList.add('close-hover');
+						}}
+						onMouseLeave={(e) => {
+							e.target.closest('.goal').classList.remove('close-hover');
+						}}
+						className="close"
+					>
+						X
+					</button>
+				)}
+			</div>
 		</div>
 	);
 }
