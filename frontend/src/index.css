@@ -12,7 +12,7 @@
 		padding-top: 100%;
 		content: '';
 	}
-	.theme-harrypotter .goal:not(:first-child) .goal-image:after {
+	.theme-harrypotter .goal:not(:first-child) .goal-image::after {
 		display: block;
 		content: '';
 		clear: both;
