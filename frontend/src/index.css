@@ -128,7 +128,6 @@ h3 {
 	background-color: #f4f4f4;
 
 	margin: 1rem 0;
-	padding: 2rem 0 1rem;
 	position: relative;
 
 	border-radius: 1rem;
@@ -143,6 +142,8 @@ h3 {
 }
 
 .theme-harrypotter .goal {
+	display: flex;
+
 	position: relative;
 	overflow: hidden;
 }
@@ -150,15 +151,15 @@ h3 {
 .theme-harrypotter .goal:not(:first-child)::after {
 	content: '';
 
-	position: absolute;
+	/* position: absolute; */
 	height: 100%;
 	/* iphone 6 need fix */
 	aspect-ratio: 1/1;
 	background: red;
 	background-size: contain;
-	right: 0;
+	/* right: 0;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-50%); */
 
 	box-shadow: -2px 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
@@ -292,6 +293,17 @@ h3 {
 	background-color: #f9f9f9;
 }
 
+.goal-content {
+	/* use flex items' margin instead parents' padding */
+	/* to ensure using flex items' size in percentage */
+	/* flex box size = flex children(included its margin) */
+	margin: 2rem 0 1rem;
+}
+
+.theme-harrypotter .goal-content {
+	flex-grow: 1;
+}
+
 .goal.removed-goal .goal-content {
 	opacity: 0;
 }
@@ -420,14 +432,12 @@ h3 {
 	}
 
 	.goals {
-		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
 	}
 
 	.theme-xuandieu .goal:first-child,
 	.theme-harrypotter .goal:first-child {
-		/* test Xuân Diệu */
+		/* (default 'span 2' --> must turn off (if not the grid will 2 columns */
 		grid-column: span 1;
 	}
 
