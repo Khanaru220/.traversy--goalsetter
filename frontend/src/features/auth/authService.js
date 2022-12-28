@@ -1,4 +1,5 @@
 const register = async (accData) => {
+	// (?) don't know how relative path of fetch defined in (local run / Netlify build)
 	const response = await fetch('/api/users', {
 		headers: {
 			'Content-Type': 'application/json',
