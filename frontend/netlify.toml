@@ -1,0 +1,4 @@
+[[redirects]] 
+    to="/api/*" 
+    from="back-728pm.netlify.app/api/*" 
+    status=200
