@@ -1,6 +1,7 @@
 const path = require('path');
 const colors = require('colors');
 const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
 const connectDB = require('./config/db.js');
 const cors = require('cors');
@@ -58,6 +59,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/', require('./middlewares/errorHandler.js'));
+module.exports.handler = serverless(app);
 // ---
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

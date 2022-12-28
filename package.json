@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "server.js",
+	"_comments": {
+		"1": "(?) don't understand why not put package.json in /backend",
+		"2": "(?) need confirm - heroku run Express's start first -> run heroku-postbuild"
+	},
 	"scripts": {
 		"start": "node ./backend/server.js",
 		"server": "nodemon ./backend/server.js",
@@ -25,6 +29,7 @@
 	},
 	"devDependencies": {
 		"concurrently": "7.3.0",
-		"nodemon": "2.0.18"
+		"nodemon": "2.0.18",
+		"serverless-http": "3.1.0"
 	}
 }
