@@ -1,7 +1,7 @@
 [[redirects]]
-  _comments = "must write it first to override the /* rule"
+  _comments = "must write it first to override the /* rule | (?) might be Netlify try to 'match/search' available path, not just absolute path"
   from = "/api/*"
-  to = "https://api-mern-goalsetter-khanaru.netlify.app/api:splat"
+  to = "https://api-mern-goalsetter-khanaru.netlify.app/api/:splat"
   status = 200
 
 [[redirects]]
