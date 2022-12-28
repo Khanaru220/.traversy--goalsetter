@@ -1,8 +1,9 @@
 [[redirects]]
+  _comments = "must write it first to override the /* rule"
   from = "/api/*"
-  to = "https://back-728pm.netlify.app/api/:splat"
+  to = "https://api-mern-goalsetter-khanaru.netlify.app/api:splat"
   status = 200
-  
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
