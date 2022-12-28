@@ -1,4 +1,6 @@
-[[redirects]] 
-    to="/api/*" 
-    from="back-728pm.netlify.app/api/*" 
-    status=200
+[[redirects]]
+  from = "https://front-728pm.netlify.app/api/*"
+  to = "https://back-728pm.netlify.app/api/:splat"
+  status = 200
+
+[[redirects]]
