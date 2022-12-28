@@ -2,7 +2,12 @@
 	"name": "frontend",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://localhost:5000",
+	"_comments": {
+		"1": "(?) don't understand how proxy direct request",
+		"1.1": "(?) does proxy effect when deploy online",
+		"2": "fixed error proxy lack of '/' - https://stackoverflow.com/a/57532447/14733188"
+	},
+	"proxy": "http://localhost:5000/",
 	"dependencies": {
 		"@reduxjs/toolkit": "1.8.3",
 		"@testing-library/jest-dom": "5.16.5",
