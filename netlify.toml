@@ -1,2 +1,8 @@
 [build]
     functions="backend"
+
+[[redirects]] 
+    _comments="https://blog.bitsrc.io/using-netlify-for-fullstack-apps-9d6a07968523 | (?) don't know why as default send request to /.netlify/function/api has no result | (?) why original example has :splat, which caused wrong request, what is it"
+    to="/.netlify/functions/server" 
+    from="/*" 
+    status=200
