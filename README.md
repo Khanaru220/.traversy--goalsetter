@@ -1,6 +1,6 @@
 # ⚠ it's pending now
 
-- live-site ✨: https://goalsetter-mern-khanaru.herokuapp.com 
+- live-site ✨: <https://goalsetter-khanaru.netlify.app>
 - I will come back to finish my commitment
 
 - [ ] 1 video showcase
