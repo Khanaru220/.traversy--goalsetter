@@ -8,4 +8,5 @@
 - [ ] 1 video showcase
 - [ ] design for 2 more built-in accounts
 - [ ] implement edit features
-- [ ] Heroku will get rid free version this year (need to migrate to another hosting)
+- [x] Heroku will get rid free version this year (need to migrate to another hosting)
+- [ ] add Link git + Guide clip to web
