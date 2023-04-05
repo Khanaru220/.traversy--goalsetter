@@ -7,3 +7,5 @@
 - [ ] design for 2 more built-in accounts
 - [ ] implement edit features
 - [ ] Heroku will get rid free version this year (need to migrate to another hosting)
+
+<img width="400px" src="https://i.imgur.com/jg3PwMu.png"/>
