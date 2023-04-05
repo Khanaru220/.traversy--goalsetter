@@ -1,0 +1,13 @@
+[[redirects]]
+  _comments = "must write it first to override the /* rule | (?) might be Netlify try to 'match/search' available path, not just absolute path"
+  from = "/api/*"
+  to = "https://api-mern-goalsetter-khanaru.netlify.app/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  _source = "https://www.netlify.com/blog/2020/04/07/creating-better-more-predictable-redirect-rules-for-spas/"
+  _comments = "let client fully control routing | (assume) index load logic from ReactRouter > read UR > transform site"
+
