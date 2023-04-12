@@ -1,0 +1,60 @@
+.container {
+	position: fixed;
+	right: 0;
+	bottom: 1.5rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 1.5rem;
+	font-size: 1.4rem;
+}
+
+.ribbon {
+	--space-description: 1.4rem;
+	--width-description: 10rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 999px 0 0 999px;
+	padding: 1.2rem; /* 	(TODO) responsive: rem */
+	background-color: cornsilk;
+	box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px;
+	transform: translateX(
+		calc(var(--space-description) + var(--width-description))
+	);
+	transition: all 0.3s;
+}
+
+.ribbon::after {
+	margin-left: var(--space-description);
+	width: var(--width-description);
+	white-space: nowrap;
+}
+
+.ribbon:first-of-type::after {
+	content: 'Play demo clip';
+}
+
+.ribbon:nth-of-type(2)::after {
+	content: 'View on Github';
+}
+.ribbon:hover {
+	transform: translateX(0);
+}
+
+.ribbon:active {
+	background-color: yellow;
+}
+
+.icon {
+	font-size: 2rem;
+	transform: translateX(4px); /* more center feel*/
+}
+
+a.ribbon {
+	color: initial;
+	text-decoration: none;
+}
